@@ -22,12 +22,71 @@ connection.connect(function (err) {
   start();
 });
 
+// function to start main prompt
 function start() {
   inquirer
     .prompt({
-      name: "EMS",
+      name: "prompt1",
       type: "list",
-      message: "What would you like to do?",
+      message: "Choose an option to access the database?",
       choices: ["View All Departments", "View All Roles", "View All Employees", "Add Department", "Add Role", "Add Employee", "Update Employee Roles", "exit"]
     })
+    .then(function (answer) {
+      var prompt1 = answer.prompt1
+      switch (prompt1) {
+        case "View All Employees":
+          ViewAllEmployees();
+          break;
+        case "View All Departments":
+          ViewAllDepartments();
+          break;
+        case "View All Roles":
+          ViewAllRoles();
+          break;
+        case "Add Employee":
+          AddEmployee();
+          break;
+        case "Add Department":
+          AddDepartment();
+          break;
+        case "Add Role":
+          AddRole();
+          break;
+        case "Update Employee Roles":
+          UpdateEmployeeRoles();
+          break;
+        case "exit":
+          console.log("exit");
+          connection.end();
+          break;
+      }
+    })
 };
+
+// functions for viewing tables
+
+function ViewAllEmployees() {
+  connection.query("SELECT * FROM employee", function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    start();
+  })
+};
+
+function ViewAllDepartments() {
+  connection.query("SELECT * FROM department", function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    start();
+  })
+};
+
+function ViewAllRoles() {
+  connection.query("SELECT * FROM role", function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    start();
+  })
+};
+
+// functions for adding items to tables next
