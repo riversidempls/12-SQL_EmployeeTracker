@@ -1,3 +1,6 @@
+-- first delete to make sure we dont create duplicates when rerunning
+DELETE FROM department;
+
 INSERT INTO department (name)
 VALUES ("Sales"),
        ("Management"),
@@ -5,6 +8,9 @@ VALUES ("Sales"),
        ("Treats"),
        ("Snacks");
        
+-- first delete to make sure we dont create duplicates when rerunning
+DELETE FROM role;
+
 INSERT INTO role (title, salary, department_id)
 VALUES ("Sales Associate", 42000, 1),
        ("Bigtime Manager", 145000, 2),
@@ -12,12 +18,15 @@ VALUES ("Sales Associate", 42000, 1),
        ("Candy Maker", 37500, 4),
        ("Nachos Designer", 41000, 5);
 
-       INSERT INTO employee (first_name, last_name, role_id, manager_id)
+-- first delete to make sure we dont create duplicates when rerunning
+DELETE FROM employee;
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Chuck", "Knoblauch", 1, 6),
        ("Ricardo", "Mantleban", 2, 7),
        ("Benjamin", "Franklin", 3, 8),
        ("Wayne", "Gretzky", 4, 9),
-       ("Werner", "Herzon", 5, 10);
+       ("Werner", "Herzon", 5, 10),
        ("DJ Jazzy", "Jeff", 6, 1),
        ("Deltron", "3030", 7, 2),
        ("Bionic", "Beaver", 8, 3),
